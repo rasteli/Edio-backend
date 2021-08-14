@@ -9,7 +9,7 @@ const routes = require("./routes")
 const app = express()
 
 mongoose.connect(
-  `mongodb+srv://gabriel:${precess.env.MONGODB_PASSWORD}@clusterdb.su1jy.mongodb.net/Posts`,
+  `mongodb+srv://gabriel:${process.env.MONGODB_PASSWORD}@clusterdb.su1jy.mongodb.net/Posts`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
