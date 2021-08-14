@@ -18,17 +18,21 @@ module.exports = async function createPDF(data) {
     path: pdfPath
   }
 
-  const browser = await puppeteer.launch({
-    args: ["--no-sandbox"],
-    headless: true
-  })
+  try {
+    const browser = await puppeteer.launch({
+      args: ["--no-sandbox"],
+      headless: true
+    })
 
-  const page = await browser.newPage()
+    const page = await browser.newPage()
 
-  await page.goto(`data:text/html;charset=UTF-8, ${data.html}`, {
-    waitUntil: "networkidle0"
-  })
+    await page.goto(`data:text/html;charset=UTF-8, ${data.html}`, {
+      waitUntil: "networkidle0"
+    })
 
-  await page.pdf(options)
-  await browser.close()
+    await page.pdf(options)
+    await browser.close()
+  } catch (error) {
+    console.log(error)
+  }
 }
