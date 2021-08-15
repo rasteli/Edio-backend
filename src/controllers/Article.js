@@ -1,4 +1,3 @@
-const ArticleSchema = require("../models/ArticleSchema")
 const createPDF = require("../utils/createPDF")
 
 module.exports = {
@@ -16,27 +15,11 @@ module.exports = {
         error: "All articles must have a title and a body,"
       })
 
-    let article = await ArticleSchema.findOne({ title })
-
-    if (!article) {
-      article = await ArticleSchema.create({
-        title,
-        body
-      })
-
+    try {
       await createPDF({ title, html })
-
       return response.status(200).end()
+    } catch (e) {
+      return response.status(500).json(e.message)
     }
-
-    return response.json({ error: "Article already exists in database." })
-  },
-
-  async delete(request, response) {
-    const id = request.params.id
-
-    const article = await ArticleSchema.findOneAndDelete({ _id: id })
-
-    return response.json(article)
   }
 }
