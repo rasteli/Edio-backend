@@ -2,12 +2,7 @@ const createPDF = require("../utils/createPDF")
 
 module.exports = {
   async store(request, response) {
-    const { title, body, html } = request.body
-
-    if (!title || !body)
-      return response.json({
-        error: "All articles must have a title and a body,"
-      })
+    const { title, html } = request.body
 
     try {
       await createPDF({ title, html })
