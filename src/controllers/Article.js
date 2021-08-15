@@ -1,12 +1,6 @@
 const createPDF = require("../utils/createPDF")
 
 module.exports = {
-  async index(request, response) {
-    const articles = await ArticleSchema.find()
-
-    return response.json(articles)
-  },
-
   async store(request, response) {
     const { title, body, html } = request.body
 

@@ -4,7 +4,6 @@ const DownloadController = require("./controllers/Download")
 
 const routes = Router()
 
-routes.get("/articles", ArticleController.index)
 routes.post("/articles", ArticleController.store)
 routes.get("/download", DownloadController.index)
 
